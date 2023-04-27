@@ -6,7 +6,7 @@ from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-webiste_url = "https://museum-app-sandy.vercel.app/"
+website_url = "https://museum-app-sandy.vercel.app/"
 
 # Setting up selenium driver
 @pytest.fixture
@@ -18,15 +18,15 @@ def driver():
 
 # Test cases for login form
 def test_successful_log_in(driver):
-  driver.get(webiste_url + "login")
+  driver.get(website_url + "login")
   driver.find_element(By.XPATH, '//*[@id="userName"]').send_keys('test-user')
   driver.find_element(By.XPATH, '//*[@id="password"]').send_keys('test')
   driver.find_element(By.XPATH, '//*[@id="__next"]/div/div/div/form/button').click()
-  WebDriverWait(driver, 10).until(EC.url_to_be(webiste_url + "favourites"))
-  assert driver.current_url == (webiste_url + "favourites")
+  WebDriverWait(driver, 10).until(EC.url_to_be(website_url + "favourites"))
+  assert driver.current_url == (website_url + "favourites")
 
 def test_unsuccessful_log_in_wrong_userName(driver):
-  driver.get(webiste_url + "login")
+  driver.get(website_url + "login")
   driver.find_element(By.XPATH, '//*[@id="userName"]').send_keys('wrong-username')
   driver.find_element(By.XPATH, '//*[@id="password"]').send_keys('test')
   driver.find_element(By.XPATH, '//*[@id="__next"]/div/div/div/form/button').click()
@@ -35,7 +35,7 @@ def test_unsuccessful_log_in_wrong_userName(driver):
   assert alert_text == "Unable to find user wrong-username"
 
 def test_unsuccessful_log_in_wrong_password(driver):
-  driver.get(webiste_url + "login")
+  driver.get(website_url + "login")
   driver.find_element(By.XPATH, '//*[@id="userName"]').send_keys('test-user')
   driver.find_element(By.XPATH, '//*[@id="password"]').send_keys('wrong-password')
   driver.find_element(By.XPATH, '//*[@id="__next"]/div/div/div/form/button').click()

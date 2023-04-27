@@ -7,7 +7,7 @@ from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-webiste_url = "https://museum-app-sandy.vercel.app/"
+website_url = "https://museum-app-sandy.vercel.app/"
 
 # Setting up selenium driver
 @pytest.fixture
@@ -23,16 +23,16 @@ def unique_username():
 
 # Test cases for register form
 def test_successful_register(driver, unique_username):
-  driver.get(webiste_url + "register")
+  driver.get(website_url + "register")
   driver.find_element(By.XPATH, '//*[@id="userName"]').send_keys(unique_username)
   driver.find_element(By.XPATH, '//*[@id="password"]').send_keys("test")
   driver.find_element(By.XPATH, '//*[@id="confirmPassword"]').send_keys("test")
   driver.find_element(By.XPATH, '//*[@id="__next"]/div/div/div/form/button').click()
-  WebDriverWait(driver, 10).until(EC.url_to_be(webiste_url + "login"))
-  assert driver.current_url == (webiste_url + "login")
+  WebDriverWait(driver, 10).until(EC.url_to_be(website_url + "login"))
+  assert driver.current_url == (website_url + "login")
 
 def test_unsuccessful_register_username_exist(driver):
-  driver.get(webiste_url + "register")
+  driver.get(website_url + "register")
   driver.find_element(By.XPATH, '//*[@id="userName"]').send_keys('test-user')
   driver.find_element(By.XPATH, '//*[@id="password"]').send_keys("test")
   driver.find_element(By.XPATH, '//*[@id="confirmPassword"]').send_keys("test")
@@ -42,7 +42,7 @@ def test_unsuccessful_register_username_exist(driver):
   assert alert_text == "User Name already taken"
 
 def test_unsuccessful_register_password_not_match(driver, unique_username):
-  driver.get(webiste_url + "register")
+  driver.get(website_url + "register")
   driver.find_element(By.XPATH, '//*[@id="userName"]').send_keys(unique_username)
   driver.find_element(By.XPATH, '//*[@id="password"]').send_keys("test")
   driver.find_element(By.XPATH, '//*[@id="confirmPassword"]').send_keys("tes")
