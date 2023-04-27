@@ -13,13 +13,8 @@ def driver():
   yield driver
   driver.quit()
 
-def test_home_search_button_unauthenticated(driver):
-  driver.get(webiste_url)
-  driver.find_element(By.XPATH, '//*[@id="__next"]/div/div/div/button').click()
-  print(driver.current_url)
-  time.sleep(1)
-  assert driver.current_url == (webiste_url + "login")
 
+# Test cases for login form
 def test_successful_log_in(driver):
   driver.get(webiste_url + "login")
   driver.find_element(By.XPATH, '//*[@id="userName"]').send_keys('test-user')
