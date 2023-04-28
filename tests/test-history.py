@@ -25,7 +25,7 @@ def logged_in_driver(driver):
   yield driver
 
 
-# Test cases for search home button
+
 def test_adding_history(logged_in_driver): 
   logged_in_driver.get(website_url)
 
